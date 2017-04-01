@@ -1,0 +1,16 @@
+
+**** Build of configuration FLASH for project semaforo ****
+
+"C:\\Freescale\\CW_MCU_v10.6\\gnu\\bin\\mingw32-make" -j8 all 
+'Building file: ../Sources/main.c'
+'Executing target #2 ../Sources/main.c'
+'Invoking: ARM Ltd Windows GCC C Compiler'
+"C:/Freescale/CW_MCU_v10.6/Cross_Tools/arm-none-eabi-gcc-4_7_3/bin/arm-none-eabi-gcc" "../Sources/main.c" @"Sources/main.args" -MMD -MP -MF"Sources/main.d" -o"Sources/main.o"
+'Finished building: ../Sources/main.c'
+' '
+'Building target: semaforo.elf'
+'Executing target #28 semaforo.elf'
+'Invoking: ARM Ltd Windows GCC C Linker'
+"C:/Freescale/CW_MCU_v10.6/Cross_Tools/arm-none-eabi-gcc-4_7_3/bin/arm-none-eabi-gcc"    @"semaforo.args" -o"semaforo.elf"
+'Finished building target: semaforo.elf'
+' '

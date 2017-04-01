@@ -1,0 +1,213 @@
+/* ###################################################################
+**     Filename    : Events.c
+**     Project     : semaforo
+**     Processor   : MKL25Z128VLK4
+**     Component   : Events
+**     Version     : Driver 01.00
+**     Compiler    : GNU C Compiler
+**     Date/Time   : 2017-03-20, 16:13, # CodeGen: 0
+**     Abstract    :
+**         This is user's event module.
+**         Put your event handler code here.
+**     Settings    :
+**     Contents    :
+**         Cpu_OnNMIINT - void Cpu_OnNMIINT(void);
+**
+** ###################################################################*/
+/*!
+** @file Events.c
+** @version 01.00
+** @brief
+**         This is user's event module.
+**         Put your event handler code here.
+*/         
+/*!
+**  @addtogroup Events_module Events module documentation
+**  @{
+*/         
+/* MODULE Events */
+
+#include "Cpu.h"
+#include "Events.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif 
+
+
+/* User includes (#include below this line is not maintained by Processor Expert) */
+
+/*
+** ===================================================================
+**     Event       :  Cpu_OnNMIINT (module Events)
+**
+**     Component   :  Cpu [MKL25Z128LK4]
+*/
+/*!
+**     @brief
+**         This event is called when the Non maskable interrupt had
+**         occurred. This event is automatically enabled when the [NMI
+**         interrupt] property is set to 'Enabled'.
+*/
+/* ===================================================================*/
+void Cpu_OnNMIINT(void)
+{
+  /* Write your code here ... */
+}
+
+/*
+** ===================================================================
+**     Event       :  TI1_OnInterrupt (module Events)
+**
+**     Component   :  TI1 [TimerInt]
+**     Description :
+**         When a timer interrupt occurs this event is called (only
+**         when the component is enabled - <Enable> and the events are
+**         enabled - <EnableEvent>). This event is enabled only if a
+**         <interrupt service/event> is enabled.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void TI1_OnInterrupt(void)
+{
+	extern int initAux;
+	initAux = 0; //Indica que o timer já teve o seu primeiro ciclo
+	extern void tickDoTimer(void);
+	tickDoTimer();
+}
+
+/*
+** ===================================================================
+**     Event       :  button_OnInterrupt (module Events)
+**
+**     Component   :  button [ExtInt]
+**     Description :
+**         This event is called when an active signal edge/level has
+**         occurred.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void button_OnInterrupt(void)
+{
+  /* Write your code here ... */
+	extern int initAux;
+	if (initAux == 0) //Verifica se o Timer já teve algum ciclo
+	{
+		extern int pedestreEsperando;
+		pedestreEsperando = 1;
+	}
+}
+
+/*
+** ===================================================================
+**     Event       :  sensorDeLuz_OnEnd (module Events)
+**
+**     Component   :  sensorDeLuz [ADC]
+**     Description :
+**         This event is called after the measurement (which consists
+**         of <1 or more conversions>) is/are finished.
+**         The event is available only when the <Interrupt
+**         service/event> property is enabled.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void sensorDeLuz_OnEnd(void)
+{
+	//extern int GetDiaOuNoite(void);
+	//int aux = GetDiaOuNoite();
+}
+
+/*
+** ===================================================================
+**     Event       :  sensorDeLuz_OnCalibrationEnd (module Events)
+**
+**     Component   :  sensorDeLuz [ADC]
+**     Description :
+**         This event is called when the calibration has been finished.
+**         User should check if the calibration pass or fail by
+**         Calibration status method./nThis event is enabled only if
+**         the <Interrupt service/event> property is enabled.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void sensorDeLuz_OnCalibrationEnd(void)
+{
+  /* Write your code here ... */
+}
+
+/*
+** ===================================================================
+**     Event       :  sensorDeLuz_OnEnd (module Events)
+**
+**     Component   :  sensorDeLuz [ADC]
+**     Description :
+**         This event is called after the measurement (which consists
+**         of <1 or more conversions>) is/are finished.
+**         The event is available only when the <Interrupt
+**         service/event> property is enabled.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void sensorDeLuz_OnEnd(void)
+{
+  /* Write your code here ... */
+}
+
+/*
+** ===================================================================
+**     Event       :  sensorDeLuz_OnCalibrationEnd (module Events)
+**
+**     Component   :  sensorDeLuz [ADC]
+**     Description :
+**         This event is called when the calibration has been finished.
+**         User should check if the calibration pass or fail by
+**         Calibration status method./nThis event is enabled only if
+**         the <Interrupt service/event> property is enabled.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void sensorDeLuz_OnCalibrationEnd(void)
+{
+  /* Write your code here ... */
+}
+
+/*
+** ===================================================================
+**     Event       :  Button_OnInterrupt (module Events)
+**
+**     Component   :  Button [ExtInt]
+**     Description :
+**         This event is called when an active signal edge/level has
+**         occurred.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void Button_OnInterrupt(void)
+{
+  /* Write your code here ... */
+}
+
+/* END Events */
+
+#ifdef __cplusplus
+}  /* extern "C" */
+#endif 
+
+/*!
+** @}
+*/
+/*
+** ###################################################################
+**
+**     This file was created by Processor Expert 10.3 [05.09]
+**     for the Freescale Kinetis series of microcontrollers.
+**
+** ###################################################################
+*/

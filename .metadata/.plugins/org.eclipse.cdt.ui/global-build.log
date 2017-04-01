@@ -1,0 +1,170 @@
+
+**** Build of configuration FLASH for project semaforo ****
+
+"C:\\Freescale\\CW_MCU_v10.6\\gnu\\bin\\mingw32-make" -j8 all 
+'Building file: ../Sources/Events.c'
+'Building file: ../Sources/main.c'
+'Building file: ../Generated_Code/AdcLdd1.c'
+'Building file: ../Generated_Code/BitIoLdd1.c'
+'Building file: ../Generated_Code/BitIoLdd2.c'
+'Building file: ../Generated_Code/BitIoLdd3.c'
+'Building file: ../Generated_Code/BitIoLdd4.c'
+'Building file: ../Generated_Code/BitIoLdd5.c'
+'Executing target #1 ../Sources/Events.c'
+'Executing target #2 ../Sources/main.c'
+'Executing target #6 ../Generated_Code/AdcLdd1.c'
+'Executing target #7 ../Generated_Code/BitIoLdd1.c'
+'Executing target #8 ../Generated_Code/BitIoLdd2.c'
+'Executing target #9 ../Generated_Code/BitIoLdd3.c'
+'Executing target #10 ../Generated_Code/BitIoLdd4.c'
+'Executing target #11 ../Generated_Code/BitIoLdd5.c'
+'Invoking: ARM Ltd Windows GCC C Compiler'
+'Invoking: ARM Ltd Windows GCC C Compiler'
+'Invoking: ARM Ltd Windows GCC C Compiler'
+'Invoking: ARM Ltd Windows GCC C Compiler'
+'Invoking: ARM Ltd Windows GCC C Compiler'
+'Invoking: ARM Ltd Windows GCC C Compiler'
+'Invoking: ARM Ltd Windows GCC C Compiler'
+"C:/Freescale/CW_MCU_v10.6/Cross_Tools/arm-none-eabi-gcc-4_7_3/bin/arm-none-eabi-gcc" "../Sources/Events.c" @"Sources/Events.args" -MMD -MP -MF"Sources/Events.d" -o"Sources/Events.o"
+'Invoking: ARM Ltd Windows GCC C Compiler'
+"C:/Freescale/CW_MCU_v10.6/Cross_Tools/arm-none-eabi-gcc-4_7_3/bin/arm-none-eabi-gcc" "../Sources/main.c" @"Sources/main.args" -MMD -MP -MF"Sources/main.d" -o"Sources/main.o"
+"C:/Freescale/CW_MCU_v10.6/Cross_Tools/arm-none-eabi-gcc-4_7_3/bin/arm-none-eabi-gcc" "../Generated_Code/AdcLdd1.c" @"Generated_Code/AdcLdd1.args" -MMD -MP -MF"Generated_Code/AdcLdd1.d" -o"Generated_Code/AdcLdd1.o"
+"C:/Freescale/CW_MCU_v10.6/Cross_Tools/arm-none-eabi-gcc-4_7_3/bin/arm-none-eabi-gcc" "../Generated_Code/BitIoLdd1.c" @"Generated_Code/BitIoLdd1.args" -MMD -MP -MF"Generated_Code/BitIoLdd1.d" -o"Generated_Code/BitIoLdd1.o"
+"C:/Freescale/CW_MCU_v10.6/Cross_Tools/arm-none-eabi-gcc-4_7_3/bin/arm-none-eabi-gcc" "../Generated_Code/BitIoLdd2.c" @"Generated_Code/BitIoLdd2.args" -MMD -MP -MF"Generated_Code/BitIoLdd2.d" -o"Generated_Code/BitIoLdd2.o"
+"C:/Freescale/CW_MCU_v10.6/Cross_Tools/arm-none-eabi-gcc-4_7_3/bin/arm-none-eabi-gcc" "../Generated_Code/BitIoLdd3.c" @"Generated_Code/BitIoLdd3.args" -MMD -MP -MF"Generated_Code/BitIoLdd3.d" -o"Generated_Code/BitIoLdd3.o"
+"C:/Freescale/CW_MCU_v10.6/Cross_Tools/arm-none-eabi-gcc-4_7_3/bin/arm-none-eabi-gcc" "../Generated_Code/BitIoLdd4.c" @"Generated_Code/BitIoLdd4.args" -MMD -MP -MF"Generated_Code/BitIoLdd4.d" -o"Generated_Code/BitIoLdd4.o"
+"C:/Freescale/CW_MCU_v10.6/Cross_Tools/arm-none-eabi-gcc-4_7_3/bin/arm-none-eabi-gcc" "../Generated_Code/BitIoLdd5.c" @"Generated_Code/BitIoLdd5.args" -MMD -MP -MF"Generated_Code/BitIoLdd5.d" -o"Generated_Code/BitIoLdd5.o"
+'Finished building: ../Sources/Events.c'
+'Finished building: ../Sources/main.c'
+'Finished building: ../Generated_Code/AdcLdd1.c'
+'Finished building: ../Generated_Code/BitIoLdd1.c'
+'Finished building: ../Generated_Code/BitIoLdd2.c'
+'Finished building: ../Generated_Code/BitIoLdd3.c'
+'Finished building: ../Generated_Code/BitIoLdd4.c'
+'Finished building: ../Generated_Code/BitIoLdd5.c'
+' '
+' '
+' '
+' '
+' '
+' '
+' '
+' '
+'Building file: ../Generated_Code/BitIoLdd6.c'
+'Building file: ../Generated_Code/Cpu.c'
+'Building file: ../Generated_Code/ExtIntLdd1.c'
+'Building file: ../Generated_Code/LED.c'
+'Building file: ../Generated_Code/PE_LDD.c'
+'Building file: ../Generated_Code/TI1.c'
+'Building file: ../Generated_Code/TU1.c'
+'Building file: ../Generated_Code/TimerIntLdd1.c'
+'Executing target #12 ../Generated_Code/BitIoLdd6.c'
+'Executing target #13 ../Generated_Code/Cpu.c'
+'Executing target #14 ../Generated_Code/ExtIntLdd1.c'
+'Executing target #15 ../Generated_Code/LED.c'
+'Executing target #16 ../Generated_Code/PE_LDD.c'
+'Executing target #17 ../Generated_Code/TI1.c'
+'Executing target #18 ../Generated_Code/TU1.c'
+'Executing target #19 ../Generated_Code/TimerIntLdd1.c'
+'Invoking: ARM Ltd Windows GCC C Compiler'
+'Invoking: ARM Ltd Windows GCC C Compiler'
+'Invoking: ARM Ltd Windows GCC C Compiler'
+'Invoking: ARM Ltd Windows GCC C Compiler'
+'Invoking: ARM Ltd Windows GCC C Compiler'
+'Invoking: ARM Ltd Windows GCC C Compiler'
+'Invoking: ARM Ltd Windows GCC C Compiler'
+"C:/Freescale/CW_MCU_v10.6/Cross_Tools/arm-none-eabi-gcc-4_7_3/bin/arm-none-eabi-gcc" "../Generated_Code/BitIoLdd6.c" @"Generated_Code/BitIoLdd6.args" -MMD -MP -MF"Generated_Code/BitIoLdd6.d" -o"Generated_Code/BitIoLdd6.o"
+'Invoking: ARM Ltd Windows GCC C Compiler'
+"C:/Freescale/CW_MCU_v10.6/Cross_Tools/arm-none-eabi-gcc-4_7_3/bin/arm-none-eabi-gcc" "../Generated_Code/Cpu.c" @"Generated_Code/Cpu.args" -MMD -MP -MF"Generated_Code/Cpu.d" -o"Generated_Code/Cpu.o"
+"C:/Freescale/CW_MCU_v10.6/Cross_Tools/arm-none-eabi-gcc-4_7_3/bin/arm-none-eabi-gcc" "../Generated_Code/ExtIntLdd1.c" @"Generated_Code/ExtIntLdd1.args" -MMD -MP -MF"Generated_Code/ExtIntLdd1.d" -o"Generated_Code/ExtIntLdd1.o"
+"C:/Freescale/CW_MCU_v10.6/Cross_Tools/arm-none-eabi-gcc-4_7_3/bin/arm-none-eabi-gcc" "../Generated_Code/LED.c" @"Generated_Code/LED.args" -MMD -MP -MF"Generated_Code/LED.d" -o"Generated_Code/LED.o"
+"C:/Freescale/CW_MCU_v10.6/Cross_Tools/arm-none-eabi-gcc-4_7_3/bin/arm-none-eabi-gcc" "../Generated_Code/PE_LDD.c" @"Generated_Code/PE_LDD.args" -MMD -MP -MF"Generated_Code/PE_LDD.d" -o"Generated_Code/PE_LDD.o"
+"C:/Freescale/CW_MCU_v10.6/Cross_Tools/arm-none-eabi-gcc-4_7_3/bin/arm-none-eabi-gcc" "../Generated_Code/TI1.c" @"Generated_Code/TI1.args" -MMD -MP -MF"Generated_Code/TI1.d" -o"Generated_Code/TI1.o"
+"C:/Freescale/CW_MCU_v10.6/Cross_Tools/arm-none-eabi-gcc-4_7_3/bin/arm-none-eabi-gcc" "../Generated_Code/TU1.c" @"Generated_Code/TU1.args" -MMD -MP -MF"Generated_Code/TU1.d" -o"Generated_Code/TU1.o"
+"C:/Freescale/CW_MCU_v10.6/Cross_Tools/arm-none-eabi-gcc-4_7_3/bin/arm-none-eabi-gcc" "../Generated_Code/TimerIntLdd1.c" @"Generated_Code/TimerIntLdd1.args" -MMD -MP -MF"Generated_Code/TimerIntLdd1.d" -o"Generated_Code/TimerIntLdd1.o"
+'Finished building: ../Generated_Code/BitIoLdd6.c'
+'Finished building: ../Generated_Code/Cpu.c'
+'Finished building: ../Generated_Code/ExtIntLdd1.c'
+'Finished building: ../Generated_Code/LED.c'
+'Finished building: ../Generated_Code/PE_LDD.c'
+'Finished building: ../Generated_Code/TI1.c'
+'Finished building: ../Generated_Code/TU1.c'
+'Finished building: ../Generated_Code/TimerIntLdd1.c'
+' '
+' '
+' '
+' '
+' '
+' '
+' '
+' '
+'Building file: ../Generated_Code/Vectors.c'
+'Building file: ../Generated_Code/button.c'
+'Building file: ../Generated_Code/pedestreVerde.c'
+'Building file: ../Generated_Code/pedestreVermelho.c'
+'Building file: ../Generated_Code/semaforoAmarelo.c'
+'Building file: ../Generated_Code/semaforoVerde.c'
+'Building file: ../Generated_Code/semaforoVermelho.c'
+'Building file: ../Generated_Code/sensorDeLuz.c'
+'Executing target #20 ../Generated_Code/Vectors.c'
+'Executing target #21 ../Generated_Code/button.c'
+'Executing target #22 ../Generated_Code/pedestreVerde.c'
+'Executing target #23 ../Generated_Code/pedestreVermelho.c'
+'Executing target #24 ../Generated_Code/semaforoAmarelo.c'
+'Executing target #25 ../Generated_Code/semaforoVerde.c'
+'Executing target #26 ../Generated_Code/semaforoVermelho.c'
+'Executing target #27 ../Generated_Code/sensorDeLuz.c'
+'Invoking: ARM Ltd Windows GCC C Compiler'
+'Invoking: ARM Ltd Windows GCC C Compiler'
+'Invoking: ARM Ltd Windows GCC C Compiler'
+'Invoking: ARM Ltd Windows GCC C Compiler'
+'Invoking: ARM Ltd Windows GCC C Compiler'
+'Invoking: ARM Ltd Windows GCC C Compiler'
+'Invoking: ARM Ltd Windows GCC C Compiler'
+"C:/Freescale/CW_MCU_v10.6/Cross_Tools/arm-none-eabi-gcc-4_7_3/bin/arm-none-eabi-gcc" "../Generated_Code/Vectors.c" @"Generated_Code/Vectors.args" -MMD -MP -MF"Generated_Code/Vectors.d" -o"Generated_Code/Vectors.o"
+'Invoking: ARM Ltd Windows GCC C Compiler'
+"C:/Freescale/CW_MCU_v10.6/Cross_Tools/arm-none-eabi-gcc-4_7_3/bin/arm-none-eabi-gcc" "../Generated_Code/button.c" @"Generated_Code/button.args" -MMD -MP -MF"Generated_Code/button.d" -o"Generated_Code/button.o"
+"C:/Freescale/CW_MCU_v10.6/Cross_Tools/arm-none-eabi-gcc-4_7_3/bin/arm-none-eabi-gcc" "../Generated_Code/pedestreVerde.c" @"Generated_Code/pedestreVerde.args" -MMD -MP -MF"Generated_Code/pedestreVerde.d" -o"Generated_Code/pedestreVerde.o"
+"C:/Freescale/CW_MCU_v10.6/Cross_Tools/arm-none-eabi-gcc-4_7_3/bin/arm-none-eabi-gcc" "../Generated_Code/pedestreVermelho.c" @"Generated_Code/pedestreVermelho.args" -MMD -MP -MF"Generated_Code/pedestreVermelho.d" -o"Generated_Code/pedestreVermelho.o"
+"C:/Freescale/CW_MCU_v10.6/Cross_Tools/arm-none-eabi-gcc-4_7_3/bin/arm-none-eabi-gcc" "../Generated_Code/semaforoAmarelo.c" @"Generated_Code/semaforoAmarelo.args" -MMD -MP -MF"Generated_Code/semaforoAmarelo.d" -o"Generated_Code/semaforoAmarelo.o"
+"C:/Freescale/CW_MCU_v10.6/Cross_Tools/arm-none-eabi-gcc-4_7_3/bin/arm-none-eabi-gcc" "../Generated_Code/semaforoVerde.c" @"Generated_Code/semaforoVerde.args" -MMD -MP -MF"Generated_Code/semaforoVerde.d" -o"Generated_Code/semaforoVerde.o"
+"C:/Freescale/CW_MCU_v10.6/Cross_Tools/arm-none-eabi-gcc-4_7_3/bin/arm-none-eabi-gcc" "../Generated_Code/semaforoVermelho.c" @"Generated_Code/semaforoVermelho.args" -MMD -MP -MF"Generated_Code/semaforoVermelho.d" -o"Generated_Code/semaforoVermelho.o"
+"C:/Freescale/CW_MCU_v10.6/Cross_Tools/arm-none-eabi-gcc-4_7_3/bin/arm-none-eabi-gcc" "../Generated_Code/sensorDeLuz.c" @"Generated_Code/sensorDeLuz.args" -MMD -MP -MF"Generated_Code/sensorDeLuz.d" -o"Generated_Code/sensorDeLuz.o"
+'Finished building: ../Generated_Code/Vectors.c'
+'Finished building: ../Generated_Code/button.c'
+'Finished building: ../Generated_Code/pedestreVerde.c'
+'Finished building: ../Generated_Code/pedestreVermelho.c'
+'Finished building: ../Generated_Code/semaforoAmarelo.c'
+'Finished building: ../Generated_Code/semaforoVerde.c'
+'Finished building: ../Generated_Code/semaforoVermelho.c'
+'Finished building: ../Generated_Code/sensorDeLuz.c'
+' '
+' '
+' '
+' '
+' '
+' '
+' '
+' '
+'Building target: semaforo.elf'
+'Executing target #28 semaforo.elf'
+'Invoking: ARM Ltd Windows GCC C Linker'
+"C:/Freescale/CW_MCU_v10.6/Cross_Tools/arm-none-eabi-gcc-4_7_3/bin/arm-none-eabi-gcc"    @"semaforo.args" -o"semaforo.elf"
+'Finished building target: semaforo.elf'
+' '
+
+**** Build of configuration FLASH for project semaforo ****
+
+"C:\\Freescale\\CW_MCU_v10.6\\gnu\\bin\\mingw32-make" -j8 all 
+'Building file: ../Sources/main.c'
+'Executing target #2 ../Sources/main.c'
+'Invoking: ARM Ltd Windows GCC C Compiler'
+"C:/Freescale/CW_MCU_v10.6/Cross_Tools/arm-none-eabi-gcc-4_7_3/bin/arm-none-eabi-gcc" "../Sources/main.c" @"Sources/main.args" -MMD -MP -MF"Sources/main.d" -o"Sources/main.o"
+'Finished building: ../Sources/main.c'
+' '
+'Building target: semaforo.elf'
+'Executing target #28 semaforo.elf'
+'Invoking: ARM Ltd Windows GCC C Linker'
+"C:/Freescale/CW_MCU_v10.6/Cross_Tools/arm-none-eabi-gcc-4_7_3/bin/arm-none-eabi-gcc"    @"semaforo.args" -o"semaforo.elf"
+'Finished building target: semaforo.elf'
+' '

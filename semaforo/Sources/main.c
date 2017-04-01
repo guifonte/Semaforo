@@ -1,0 +1,370 @@
+/* ###################################################################
+**     Filename    : main.c
+**     Project     : semaforo
+**     Processor   : MKL25Z128VLK4
+**     Version     : Driver 01.01
+**     Compiler    : GNU C Compiler
+**     Date/Time   : 2017-03-20, 16:13, # CodeGen: 0
+**     Abstract    :
+**         Main module.
+**         This module contains user's application code.
+**     Settings    :
+**     Contents    :
+**         No public methods
+**
+** ###################################################################*/
+/*!
+** @file main.c
+** @version 01.01
+** @brief
+**         Main module.
+**         This module contains user's application code.
+*/         
+/*!
+**  @addtogroup main_module main module documentation
+**  @{
+*/         
+/* MODULE main */
+
+
+/* Including needed modules to compile this module/procedure */
+#include "Cpu.h"
+#include "Events.h"
+#include "LED.h"
+#include "BitIoLdd1.h"
+#include "TI1.h"
+#include "TimerIntLdd1.h"
+#include "TU1.h"
+#include "button.h"
+#include "ExtIntLdd1.h"
+#include "semaforoVerde.h"
+#include "BitIoLdd2.h"
+#include "semaforoAmarelo.h"
+#include "BitIoLdd3.h"
+#include "semaforoVermelho.h"
+#include "BitIoLdd4.h"
+#include "pedestreVerde.h"
+#include "BitIoLdd5.h"
+#include "pedestreVermelho.h"
+#include "BitIoLdd6.h"
+#include "sensorDeLuz.h"
+#include "sensorDeLuz.h"
+#include "AdcLdd1.h"
+/* Including shared modules, which are used for whole project */
+#include "PE_Types.h"
+#include "PE_Error.h"
+#include "PE_Const.h"
+#include "IO_Map.h"
+
+/* User includes (#include below this line is not maintained by Processor Expert) */
+int counter = 0; //Contador de ciclos do timer
+int carroVerde = 1, carroAmarelo = 0, carroVermelho = 0, pedVerde = 0, pedVermelho = 1; //Estado dos Leds
+int cicloVerde = 50, cicloAmarelo = 20, cicloVermelho = 40, cicloPedestrePiscando = 20; //Duração dos ciclos
+int velocidadePiscando = 2; //Velocidade que pisca o sinal. Ex.: 1 = a cada 100ms. 2 = a cada 200ms.
+int estado = 0; //0 é verde para carro, 1 amarelo, 2 vermelho p/ carro e verde para pedestre, 3 vermelho p/carro e piscando p/ pedestre
+int counterDiaNoite = 0; //Contador de ticks para o sensor luminoso
+int noite = 0; //se 1 é noite, se 0 é dia. Variável usada no GetDiaOuNoite()
+int thresholdDiaNoite = 30; //Valor necessário do contador para comutar os modos dia e noite
+int pedestreEsperando = 0; //Indica se há pedestres esperando
+int estadoNoite = 0; //Indica se o semáforo está no modo noturno(1) ou no modo diurno(0)
+int valorLuminosidade; //valor da luminosidade do ldr usado em GetClaroOuEscuro()
+
+/*Devido a falhas do controlador, o botão gera uma interrupção antes do timer dar o primeiro tick. 
+Para evitar iniciar o ciclo do pedestre esperando, é necessário o uso dessa variável de controle, para permitir a interrupção do botão apenas depois do timer dar o seu primeiro tick.*/
+int initAux = 1; 
+
+void ligaSemaforoVerde(void)
+{
+	carroVerde = 1;
+	semaforoVerde_NegVal();
+}
+
+void desligaSemaforoVerde(void)
+{
+	carroVerde = 0;
+	semaforoVerde_NegVal();
+}
+
+void ligaSemaforoAmarelo(void)
+{
+	carroAmarelo = 1;						
+	semaforoAmarelo_NegVal();
+}
+
+void desligaSemaforoAmarelo(void)
+{
+	carroAmarelo = 0;						
+	semaforoAmarelo_NegVal();
+}
+
+void ligaSemaforoVermelho(void)
+{
+	carroVermelho = 1;
+	semaforoVermelho_NegVal();
+}
+
+void desligaSemaforoVermelho(void)
+{
+	carroVermelho = 0;
+	semaforoVermelho_NegVal();	
+}
+
+void ligaPedestreVermelho(void)
+{
+	pedVermelho = 1;
+	pedestreVermelho_NegVal();
+}
+
+void desligaPedestreVermelho(void)
+{
+	pedVermelho = 0;
+	pedestreVermelho_NegVal();
+}
+
+void ligaPedestreVerde(void)
+{
+	pedVerde = 1;
+	pedestreVerde_NegVal();
+}
+
+void desligaPedestreVerde(void)
+{
+	pedVerde = 0;
+	pedestreVerde_NegVal();
+}
+
+void verificaSeDesligadoELigaPedestreVermelho(void)
+{
+if (pedVermelho == 0)
+	{
+		pedVermelho = 1;
+		pedestreVermelho_NegVal();
+	}
+}
+
+void verificaSeLigadoEApagaSemaforoAmarelo(void)
+{
+	if (carroAmarelo == 1)
+	{
+		carroAmarelo = 0;
+		semaforoAmarelo_NegVal();
+	}
+}
+
+int GetClaroOuEscuro(void)
+{	
+	sensorDeLuz_GetValue(&valorLuminosidade);
+	if (valorLuminosidade > 60000)
+	{
+		return 1; //Claro	
+	}
+	else
+	{
+		return 0; //Escuro
+	}
+}
+
+int GetDiaOuNoite(void)
+{
+	if (counterDiaNoite > thresholdDiaNoite) //Verifica se houve mudança para dia ou para noite caso estoure o threshold
+	{
+		if (noite == 0) 
+		{
+			noite = 1;
+		}
+		else
+		{
+			noite = 0;
+		}
+		counterDiaNoite = 0;
+	}
+	if (noite == 0) //dia
+		{
+			if (GetClaroOuEscuro() == 0) //Se retornou escuro, acresce o contador
+			{
+				counterDiaNoite++;
+			}
+			else //Se retornou claro, zera o contador
+			{
+				counterDiaNoite = 0;
+			}
+			return 1; //dia
+		}
+		else //noite
+		{
+			if (GetClaroOuEscuro() == 1) //Se retornou claro, acresce o contador
+			{
+				counterDiaNoite++;
+			}
+			else //Se retornou escuro, zera o contador
+			{
+				counterDiaNoite = 0;		
+			}
+			return 0; //noite
+		}
+}
+
+void mudaParaDia(void)
+{
+	estadoNoite = 0; //Muda estado para dia
+	
+	verificaSeDesligadoELigaPedestreVermelho();
+	verificaSeLigadoEApagaSemaforoAmarelo();
+	ligaSemaforoVerde();
+}
+
+void mudaParaNoite(void)
+{
+	estadoNoite = 1;
+	desligaSemaforoVerde();
+}
+
+void piscaSemaforoAmarelo(void)
+{
+	if (carroAmarelo == 1)
+	{
+		carroAmarelo = 0;
+	}
+	else
+	{
+		carroAmarelo = 1;
+	}
+	semaforoAmarelo_NegVal();
+}
+
+void piscaPedestreVermelho(void)
+{
+	if (pedVermelho == 1)
+	{
+		pedVermelho = 0;
+	}
+	else
+	{
+		pedVermelho = 1;
+	}
+	pedestreVermelho_NegVal();
+}
+
+void tickDoTimer(void)
+{
+	if (estadoNoite == 1) //Noite
+	{
+		if (GetDiaOuNoite() == 1) //Mudou para dia
+		{		
+			mudaParaDia(); //Muda estado para dia
+		}
+		else //Continua noite
+		{
+			piscaSemaforoAmarelo();
+			piscaPedestreVermelho();
+
+			pedestreEsperando = 0; //zera o indicador que há pedestre esperando
+		}
+	}
+	else //Dia
+	{	
+		if (pedestreEsperando == 1)
+		{
+			counter++;
+			if (estado == 0) //Sinal verde para o carro e vermelho para o pedestre
+			{
+				if (counter == cicloVerde)
+				{
+					desligaSemaforoVerde();
+					ligaSemaforoAmarelo();
+					
+					estado = 1;
+					counter = 0;
+				}
+			}
+			else if (estado == 1) //Sinal amarelo para o carro e vermelho para o pedestre
+			{					
+				if (counter == cicloAmarelo) //fim do ciclo de amarelo para o carro e vermelho para o pedestre
+				{
+					desligaSemaforoAmarelo();
+					desligaPedestreVermelho();
+					ligaPedestreVerde();
+					ligaSemaforoVermelho();								
+					
+					estado = 2;
+					counter = 0;
+				}
+			}
+			else if (estado == 2) //Sinal vermelho para o carro e verde para o pedestre
+			{
+				if (counter == cicloVermelho) //fim do ciclo de sinal vermelho para o carro e verde para o pedestre
+				{	
+					desligaPedestreVerde();
+					
+					estado = 3;
+					counter = 0;
+				}
+			}
+			else if (estado == 3) //Sinal vermelho para o carro e vermelho piscando para o pedestre
+			{
+				if (counter%velocidadePiscando == 0) //pisca o led e comuta a variavel pedVermelho
+				{
+					piscaPedestreVermelho();
+				}			
+				if (counter == cicloPedestrePiscando) //fim do ciclo da luz vermelha piscante para o pedestre
+				{
+					desligaSemaforoVermelho();
+					ligaSemaforoVerde();
+					
+					verificaSeDesligadoELigaPedestreVermelho();
+					
+					pedestreEsperando = 0;
+					counter = 0;
+					estado = 0;
+					
+				}	
+			}
+		}
+		else //Sem pedestres esperando. Verifica se virou noite
+		{
+			if (GetDiaOuNoite() == 0) //Virou noite
+			{
+				mudaParaNoite();
+			}
+		}
+	}
+	sensorDeLuz_Measure(0); //atualiza o valor do sensor de luz
+}
+
+/*lint -save  -e970 Disable MISRA rule (6.3) checking. */
+int main(void)
+/*lint -restore Enable MISRA rule (6.3) checking. */
+{
+  /* Write your local variable definition here */
+	counter = 0;
+	pedestreEsperando = 0;
+  /*** Processor Expert internal initialization. DON'T REMOVE THIS CODE!!! ***/
+  PE_low_level_init();
+  /*** End of Processor Expert internal initialization.                    ***/
+
+  /* Write your code here */
+  /* For example: for(;;) { } */
+
+  /*** Don't write any code pass this line, or it will be deleted during code generation. ***/
+  /*** RTOS startup code. Macro PEX_RTOS_START is defined by the RTOS component. DON'T MODIFY THIS CODE!!! ***/
+  #ifdef PEX_RTOS_START
+    PEX_RTOS_START();                  /* Startup of the selected RTOS. Macro is defined by the RTOS component. */
+  #endif
+  /*** End of RTOS startup code.  ***/
+  /*** Processor Expert end of main routine. DON'T MODIFY THIS CODE!!! ***/
+  for(;;){}
+  /*** Processor Expert end of main routine. DON'T WRITE CODE BELOW!!! ***/
+} /*** End of main routine. DO NOT MODIFY THIS TEXT!!! ***/
+
+/* END main */
+/*!
+** @}
+*/
+/*
+** ###################################################################
+**
+**     This file was created by Processor Expert 10.3 [05.09]
+**     for the Freescale Kinetis series of microcontrollers.
+**
+** ###################################################################
+*/
